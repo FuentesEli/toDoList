@@ -1,27 +1,33 @@
-const taskForm = document.getElementById("task-form");
-const taskList = document.getElementById("task-list");
-
-taskForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const taskTitle = document.getElementById("task-title").value;
-    const taskDescription = document.getElementById("task-description").value;
-
-    if (taskTitle.trim() === "") {
-        alert("El título de la tarea no puede estar vacío.");
-        return;
+// Task class
+class Task {
+    constructor(title, description) {
+      this.title = title;
+      this.description = description;
+      this.completed = false;
     }
-
-    const taskItem = document.createElement("li");
-    taskItem.innerHTML = `
-        <h3>${taskTitle}</h3>
-        <p>${taskDescription}</p>
-        <button class="complete-button">Completar</button>
-        <button class="delete-button">Eliminar</button>
-    `;
-
-    taskList.appendChild(taskItem);
-
-    // Limpiar el formulario
-    taskForm.reset();
-});
+  }
+  
+  // Function to add a new task
+  function addTask(event) {
+    event.preventDefault();
+  
+    const titleInput = document.getElementById('titleInput');
+    const descriptionInput = document.getElementById('descriptionInput');
+  
+    const title = titleInput.value.trim();
+    const description = descriptionInput.value.trim();
+  
+    if (title === '') {
+      alert('Please enter a title for the task.');
+      return;
+    }
+  
+    const task = new Task(title, description);
+    tasks.push(task);
+  
+    renderTasks();
+    titleInput.value = '';
+    descriptionInput.value = '';
+  }
+  
+ 
